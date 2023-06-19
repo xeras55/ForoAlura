@@ -21,7 +21,7 @@ import jakarta.persistence.Table;
 @Table(name = "duda")
 @EntityListeners(AuditingEntityListener.class)
 public class DudaModeloNew {
-    @Id
+  @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private long id;
   @Column
@@ -48,6 +48,13 @@ public class DudaModeloNew {
 
   }
   
+
+
+  public DudaModeloNew(String titulo, String mensaje) {
+    this.titulo = titulo;
+    this.mensaje = mensaje;
+  }
+
 
 
   public DudaModeloNew(String titulo, String mensaje, Date fecha_creacion, long id_autor, long id_curso,
