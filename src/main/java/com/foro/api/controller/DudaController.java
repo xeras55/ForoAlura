@@ -18,6 +18,7 @@ import com.foro.api.modelo.CursoModelo;
 import com.foro.api.modelo.DudaModelo;
 import com.foro.api.modelo.DudaModeloNew;
 import com.foro.api.modelo.UsuarioModelo;
+import com.foro.api.modeloDto.DudaDTO;
 import com.foro.api.repository.DudaRepository;
 
 
@@ -53,7 +54,7 @@ public class DudaController {
   @GetMapping("/dudaById/{id}")
   public List<DudaModelo>dudasById(@PathVariable("id") Long id){
     List<Object[]>result = dudaRepository.findDudaDataById(id);
-    List<DudaModelo>dudas = new ArrayList<>();
+    List<DudaModelo> dudas = new ArrayList<>();
     for(Object[] row : result){
       DudaModelo duda = new DudaModelo();
       duda.setTitulo((String) row[0]);
@@ -71,4 +72,29 @@ public class DudaController {
     return dudas;
   }
 
+  @GetMapping("/dudaByIdDto/{id}")
+  public List<DudaDTO>dudasByIdDto(@PathVariable("id") Long id){
+  List<Object[]>result = dudaRepository.findDudaDataById(id);
+  //List<DudaModelo>dudas = new ArrayList<>();
+  List<DudaDTO> dudasDto = new ArrayList<>();
+
+    for(Object[] row : result){
+      DudaDTO duda = new DudaDTO();
+      duda.setTitulo((String) row[0]);
+      duda.setMensaje((String) row[1]);
+      duda.setFecha_creacion((Date) row[2]);
+      duda.setStatus((Boolean) row[3]);
+      UsuarioModelo usuario = new UsuarioModelo();
+      usuario.setNombre((String) row[4]);
+      String nombreUsua = usuario.getNombre();
+      duda.setAutor_nombre(nombreUsua);
+      CursoModelo curso = new CursoModelo();
+      curso.setNombre((String) row[5]);
+      String cursoNombre = curso.getNombre();
+      duda.setCurso_nombre(cursoNombre);
+      dudasDto.add(duda);
+    }
+
+  return dudasDto;
+}
 }

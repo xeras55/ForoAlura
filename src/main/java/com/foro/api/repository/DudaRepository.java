@@ -32,6 +32,7 @@ public interface DudaRepository extends JpaRepository<DudaModelo, Long> {
       "INNER JOIN duda.cursoModelo curso ")
   List<Object[]>getAll();
 
+
   /*
   @Modifying
   @Query(value = "INSERT INTO duda (titulo, mensaje, fecha_creacion, id_autor, id_curso, respuestas) VALUES (:titulo, :mensaje, :fecha_creacion, :id_autor, :id_curso, :respuestas)", nativeQuery = true)

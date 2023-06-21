@@ -8,7 +8,23 @@ public class DudaDTO {
   private Date fecha_creacion;
   private String autor_nombre;
   private String curso_nombre;
-  private String status;
+  private Boolean status;
+
+
+  
+  
+  public DudaDTO(String titulo, String mensaje, Date fecha_creacion, String autor_nombre, String curso_nombre,
+      Boolean status) {
+    this.titulo = titulo;
+    this.mensaje = mensaje;
+    this.fecha_creacion = fecha_creacion;
+    this.autor_nombre = autor_nombre;
+    this.curso_nombre = curso_nombre;
+    this.status = status;
+  }
+  public DudaDTO() {
+
+  }
   public String getTitulo() {
     return titulo;
   }
@@ -39,11 +55,11 @@ public class DudaDTO {
   public void setCurso_nombre(String curso_nombre) {
     this.curso_nombre = curso_nombre;
   }
-  public String getStatus() {
+  public Boolean getStatus() {
     return status;
   }
-  public void setStatus(String status) {
-    this.status = status;
+  public void setStatus(Boolean boolean1) {
+    this.status = boolean1;
   }
   
 }
