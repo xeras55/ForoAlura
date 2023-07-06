@@ -39,7 +39,7 @@ public class UsuarioModelo {
   @Column 
   private String contrasena;
   @Column
-  private ERole roles;
+  private String roles;
   
   //*se usa un Set ya que no permite item repetidos
 
@@ -49,7 +49,7 @@ public class UsuarioModelo {
     this.nombre = datosRegistroUsuario.nombre();
     this.email = datosRegistroUsuario.email();
     this.contrasena = datosRegistroUsuario.contrasena();
-    this.roles = datosRegistroUsuario.roles();
+    this.roles = datosRegistroUsuario.roles().toString();
   }
   
 
@@ -93,12 +93,12 @@ public class UsuarioModelo {
   }
 
 
-  public ERole getRoles() {
+  public String getRoles() {
     return roles;
   }
 
 
-  public void setRoles(ERole roles) {
+  public void setRoles(String roles) {
     this.roles = roles;
   }
 

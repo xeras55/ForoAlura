@@ -31,7 +31,7 @@ public class UsuarioController {
     usuarioModelo.setNombre(datosRegistroUsuario.nombre());
     usuarioModelo.setEmail(datosRegistroUsuario.email());
     usuarioModelo.setContrasena(datosRegistroUsuario.contrasena());
-    usuarioModelo.setRoles(datosRegistroUsuario.roles());
+    usuarioModelo.setRoles(datosRegistroUsuario.roles().toString());
     return usuarioRepository.save(usuarioModelo);
     
     
