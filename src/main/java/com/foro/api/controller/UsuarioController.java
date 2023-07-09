@@ -5,6 +5,8 @@ import java.util.List;
 import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -20,6 +22,9 @@ import com.foro.api.repository.UsuarioRepository;
 @RestController
 @RequestMapping("/usuarios")
 public class UsuarioController {
+
+    @Autowired
+    private PasswordEncoder passwordEncoder;
   @Autowired
   private UsuarioRepository usuarioRepository;
 
@@ -30,7 +35,7 @@ public class UsuarioController {
     UsuarioModelo usuarioModelo = new UsuarioModelo();
     usuarioModelo.setNombre(datosRegistroUsuario.nombre());
     usuarioModelo.setEmail(datosRegistroUsuario.email());
-    usuarioModelo.setContrasena(datosRegistroUsuario.contrasena());
+    usuarioModelo.setContrasena(passwordEncoder.encode(datosRegistroUsuario.contrasena()));
     usuarioModelo.setRoles(datosRegistroUsuario.roles().toString());
     return usuarioRepository.save(usuarioModelo);
     

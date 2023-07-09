@@ -1,47 +1,65 @@
 package com.foro.api.security;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.http.HttpMethod;
-import org.springframework.http.HttpStatus;
 import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
+import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
+import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
-import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
-import org.springframework.security.config.annotation.web.configurers.HttpBasicConfigurer;
 import org.springframework.security.config.http.SessionCreationPolicy;
-import org.springframework.security.core.userdetails.User;
-import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.password.NoOpPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
-import org.springframework.security.web.authentication.HttpStatusEntryPoint;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+
+import com.foro.api.security.filters.JwtAuthenticationFilter;
+import com.foro.api.security.filters.JwtAuthorizationFilter;
+import com.foro.api.security.jwt.JWTUtils;
+import com.foro.api.service.CustomUserDetailsServiceImpl;
 
 @Configuration
 public class SecurityConfig  {
   
-  
+  @Autowired 
+  JWTUtils jwtUtils;
 
+  @Autowired
+  CustomUserDetailsServiceImpl customUserDetailsServiceImpl;
+
+  @Autowired
+  JwtAuthorizationFilter authorizationFilter;
 
   @Bean
-  SecurityFilterChain filterChain(HttpSecurity http) throws Exception{
+  SecurityFilterChain filterChain(HttpSecurity http, AuthenticationManager authenticationManager) throws Exception{
+
+    JwtAuthenticationFilter jwtAuthenticationFilter = new JwtAuthenticationFilter(jwtUtils);
+    jwtAuthenticationFilter.setAuthenticationManager(authenticationManager);
+    jwtAuthenticationFilter.setFilterProcessesUrl("/login");
+
     return http
           .csrf(config -> config.disable())
           .authorizeHttpRequests(auth ->{
-            auth.requestMatchers("/duda/dudaAll").permitAll();
-            auth.requestMatchers("/usuarios/crearUsuario").permitAll();
+            auth.requestMatchers("/duda/dudaAll").hasAnyRole("ADMIN", "USER", "INVITED");
+            auth.requestMatchers("/duda//dudaByIdDto/{id}").hasAnyRole("ADMIN", "USER", "INVITED");
+            auth.requestMatchers("/newDuda/newD").hasAnyRole("ADMIN", "USER");
+            auth.requestMatchers("/newDuda/actualizarDuda/{id}").hasAnyRole("ADMIN", "USER");
+            auth.requestMatchers("/newDuda/deletDuda/{id}").hasAnyRole("ADMIN", "USER");
+            auth.requestMatchers("/topico/topicof").hasAnyRole("ADMIN", "USER","INVITED");
+            auth.requestMatchers("/newDuda/newD").hasAnyRole("ADMIN", "USER","INVITED");
+
             auth.anyRequest().authenticated();
           })
           .sessionManagement(session ->{
             session.sessionCreationPolicy(SessionCreationPolicy.STATELESS);
           })
-          .httpBasic(httpbasic ->{})
+          .addFilter(jwtAuthenticationFilter)
+          .addFilterBefore(authorizationFilter, UsernamePasswordAuthenticationFilter.class)
           .build();
   }
+
+  /*
 @Bean
   UserDetailsService userDetailsService(){
     InMemoryUserDetailsManager manager = new InMemoryUserDetailsManager();
@@ -52,16 +70,17 @@ public class SecurityConfig  {
 
     return manager;
   }
-
+ */
   @Bean
   PasswordEncoder passwordEncoder(){
-    return NoOpPasswordEncoder.getInstance();
+    return new BCryptPasswordEncoder();
+    //return NoOpPasswordEncoder.getInstance();
   }
 
-
+  @Bean
   AuthenticationManager authenticationManager(HttpSecurity httpSecurity, PasswordEncoder passwordEncoder) throws Exception{
     return httpSecurity.getSharedObject(AuthenticationManagerBuilder.class)
-    .userDetailsService(userDetailsService())
+    .userDetailsService(customUserDetailsServiceImpl)
     .passwordEncoder(passwordEncoder)
     .and().build();
     
@@ -85,5 +104,18 @@ public class SecurityConfig  {
     
   }
  */
-  
+
+
+/*
+  public static void main(String[] args) {
+    
+
+String password = "1234";
+BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+
+String hashedPassword = encoder.encode(password);
+System.out.println(hashedPassword);
+
+  }
+   */
 }

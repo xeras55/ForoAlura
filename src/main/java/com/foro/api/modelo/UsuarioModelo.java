@@ -20,6 +20,8 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 
 
 
@@ -30,13 +32,14 @@ public class UsuarioModelo {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private long id;
-  
+
   @Column
-  private String nombre;
-  @Column
-  
   private String email;
-  @Column 
+  
+  @NotBlank
+  private String nombre;
+  
+  @NotBlank
   private String contrasena;
   @Column
   private String roles;
@@ -51,13 +54,12 @@ public class UsuarioModelo {
     this.contrasena = datosRegistroUsuario.contrasena();
     this.roles = datosRegistroUsuario.roles().toString();
   }
-  
 
 
-  public UsuarioModelo(UsuarioDTO usuarioDTO) {
+  public UsuarioModelo(String nombre, String contrasena) {
+    this.nombre = nombre;
+    this.contrasena = contrasena;
   }
-
-
 
   public UsuarioModelo(String nombre) {
     this.nombre = nombre;
