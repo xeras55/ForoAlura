@@ -65,9 +65,4 @@ public class DudaService {
     dudaDTO.setStatus(dudas.getEstado());
     return dudaDTO;
   }
-
-
-
-
-
 }

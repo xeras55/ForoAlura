@@ -37,7 +37,7 @@ public class SecurityConfig  {
 
 
 
-  /*
+  
 //! config sin seguridad para hacer pruebas
   @Bean
   SecurityFilterChain filterChain(HttpSecurity http) throws Exception{
@@ -48,6 +48,7 @@ public class SecurityConfig  {
             auth.requestMatchers("/usuarios/crearUsuario").permitAll();
             auth.requestMatchers("/newDuda/newD").permitAll();
             auth.requestMatchers("/duda/dudaByIdDto/{id}").permitAll();
+            auth.requestMatchers("/newDuda/actualizarDuda/{id}").permitAll();
             auth.anyRequest().authenticated();
           })
           .sessionManagement(session ->{
@@ -79,10 +80,10 @@ public class SecurityConfig  {
     .and().build();
 
   }
-*/
+
   //! config sin seguridad para hacer pruebas
 //! config con seguridad
-  
+  /*
   @Bean
   SecurityFilterChain filterChain(HttpSecurity http, AuthenticationManager authenticationManager) throws Exception{
 
@@ -115,7 +116,7 @@ public class SecurityConfig  {
           .addFilterBefore(authorizationFilter, UsernamePasswordAuthenticationFilter.class)
           .build();
   }
- 
+
   @Bean
   PasswordEncoder passwordEncoder(){
     return new BCryptPasswordEncoder();
@@ -130,7 +131,7 @@ public class SecurityConfig  {
     .and().build();
     
   }
-
+ */
 //!
 /*
     @Bean
