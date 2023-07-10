@@ -38,7 +38,5 @@ public class UsuarioController {
     usuarioModelo.setContrasena(passwordEncoder.encode(datosRegistroUsuario.contrasena()));
     usuarioModelo.setRoles(datosRegistroUsuario.roles().toString());
     return usuarioRepository.save(usuarioModelo);
-    
-    
   }
 }

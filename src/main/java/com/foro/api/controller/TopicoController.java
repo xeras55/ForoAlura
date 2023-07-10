@@ -23,24 +23,24 @@ public class TopicoController {
   @Autowired
   private TopicoRepository topicoRepository;
 
-  @GetMapping("/topicof")
+  @GetMapping("/topicoAll")
   public List<TopicoModelo>allModelo(){
     return topicoRepository.findAll();
   }
-  @GetMapping("/topicoF/{id}")
+  @GetMapping("/topicoById/{id}")
   public List<TopicoModelo>findById(@PathVariable("id") long id){
     return topicoRepository.findById(id);
   }
-  @PostMapping("/registrart")
+  @PostMapping("/registrarTopico")
   public TopicoModelo createModelo(@RequestBody TopicoModelo topicoModelo){
     return topicoRepository.save(topicoModelo);
   }
-  @PutMapping("/actualizart/{id}")
+  @PutMapping("/actualizarTopico/{id}")
   public TopicoModelo updateTopico(@PathVariable("id") long id, @RequestBody TopicoModelo topicoModelo){
         topicoModelo.setId(id);
     return topicoRepository.save(topicoModelo);
   }
-  @DeleteMapping("/deletet/{id}")
+  @DeleteMapping("/deleteTopico/{id}")
   public void deleteTopico(@PathVariable("id")long id){
     topicoRepository.deleteById(id);
   }

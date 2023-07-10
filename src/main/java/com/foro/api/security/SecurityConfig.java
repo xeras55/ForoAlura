@@ -9,8 +9,12 @@ import org.springframework.security.config.annotation.method.configuration.Enabl
 import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.http.SessionCreationPolicy;
+import org.springframework.security.core.userdetails.User;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.NoOpPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
@@ -31,6 +35,54 @@ public class SecurityConfig  {
   @Autowired
   JwtAuthorizationFilter authorizationFilter;
 
+
+
+  /*
+//! config sin seguridad para hacer pruebas
+  @Bean
+  SecurityFilterChain filterChain(HttpSecurity http) throws Exception{
+    return http
+          .csrf(config -> config.disable())
+          .authorizeHttpRequests(auth ->{
+            auth.requestMatchers("/duda/dudaAll").permitAll();
+            auth.requestMatchers("/usuarios/crearUsuario").permitAll();
+            auth.requestMatchers("/newDuda/newD").permitAll();
+            auth.requestMatchers("/duda/dudaByIdDto/{id}").permitAll();
+            auth.anyRequest().authenticated();
+          })
+          .sessionManagement(session ->{
+            session.sessionCreationPolicy(SessionCreationPolicy.STATELESS);
+          })
+          .httpBasic(httpbasic ->{})
+          .build();
+  }
+    UserDetailsService userDetailsService(){
+    InMemoryUserDetailsManager manager = new InMemoryUserDetailsManager();
+    manager.createUser(User.withUsername("geras")
+            .password("123456")
+            .roles()
+            .build());
+
+    return manager;
+  }
+
+  @Bean
+  PasswordEncoder passwordEncoder(){
+    return NoOpPasswordEncoder.getInstance();
+  }
+
+
+  AuthenticationManager authenticationManager(HttpSecurity httpSecurity, PasswordEncoder passwordEncoder) throws Exception{
+    return httpSecurity.getSharedObject(AuthenticationManagerBuilder.class)
+    .userDetailsService(userDetailsService())
+    .passwordEncoder(passwordEncoder)
+    .and().build();
+
+  }
+*/
+  //! config sin seguridad para hacer pruebas
+//! config con seguridad
+  
   @Bean
   SecurityFilterChain filterChain(HttpSecurity http, AuthenticationManager authenticationManager) throws Exception{
 
@@ -41,13 +93,18 @@ public class SecurityConfig  {
     return http
           .csrf(config -> config.disable())
           .authorizeHttpRequests(auth ->{
+            //*duda
             auth.requestMatchers("/duda/dudaAll").hasAnyRole("ADMIN", "USER", "INVITED");
             auth.requestMatchers("/duda//dudaByIdDto/{id}").hasAnyRole("ADMIN", "USER", "INVITED");
             auth.requestMatchers("/newDuda/newD").hasAnyRole("ADMIN", "USER");
             auth.requestMatchers("/newDuda/actualizarDuda/{id}").hasAnyRole("ADMIN", "USER");
             auth.requestMatchers("/newDuda/deletDuda/{id}").hasAnyRole("ADMIN", "USER");
-            auth.requestMatchers("/topico/topicof").hasAnyRole("ADMIN", "USER","INVITED");
-            auth.requestMatchers("/newDuda/newD").hasAnyRole("ADMIN", "USER","INVITED");
+            //*usuario
+            auth.requestMatchers("/usuarios/crearUsuario").hasRole("ADMIN");
+            //* test para validar los roles
+            auth.requestMatchers("/test/TestAdmin").hasRole("ADMIN");
+            auth.requestMatchers("/test/TestUser").hasRole("USER");
+            auth.requestMatchers("/test/TestInvited").hasRole("INVITED");
 
             auth.anyRequest().authenticated();
           })
@@ -58,19 +115,7 @@ public class SecurityConfig  {
           .addFilterBefore(authorizationFilter, UsernamePasswordAuthenticationFilter.class)
           .build();
   }
-
-  /*
-@Bean
-  UserDetailsService userDetailsService(){
-    InMemoryUserDetailsManager manager = new InMemoryUserDetailsManager();
-    manager.createUser(User.withUsername("geras")
-            .password("123456")
-            .roles()
-            .build());
-
-    return manager;
-  }
- */
+ 
   @Bean
   PasswordEncoder passwordEncoder(){
     return new BCryptPasswordEncoder();
@@ -86,6 +131,7 @@ public class SecurityConfig  {
     
   }
 
+//!
 /*
     @Bean
   SecurityFilterChain filterChain1(HttpSecurity http, AuthenticationManager authManager) throws Exception{
