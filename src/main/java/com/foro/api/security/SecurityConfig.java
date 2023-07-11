@@ -37,7 +37,7 @@ public class SecurityConfig  {
 
 
 
-  
+/*
 //! config sin seguridad para hacer pruebas
   @Bean
   SecurityFilterChain filterChain(HttpSecurity http) throws Exception{
@@ -81,9 +81,9 @@ public class SecurityConfig  {
     .and().build();
 
   }
-
+ */
   //! config sin seguridad para hacer pruebas
-  /*
+  
 //! config con seguridad
   
   @Bean
@@ -133,7 +133,7 @@ public class SecurityConfig  {
     .and().build();
     
   }
- */
+
 //!
 /*
     @Bean
