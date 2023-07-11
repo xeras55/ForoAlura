@@ -30,4 +30,19 @@ Aqui presento mi solucion a el reto propuesto por parte de Alura Latam en la for
 
 ### tecnologias usadas
 
-| VsCode| [imagen perrona|
+| Va         | imagen perrona |
+| ---------- | -------------- |
+| Java       |                |
+| MySql      |                |
+| SpringBoot |                |
+
+## EndPoints
+
+| EndPoints                 | Descripcion                                             | Rol                   | Metodo |
+| ------------------------- | ------------------------------------------------------- | --------------------- | ------ |
+| /duda/dudaAll             | Permite ver todas las consultas de los ususarios        | INVITED, USER y ADMIN | Get    |
+| /duda/dudaByIdDto/{id}    | Permite ver las consiltas filtradas por id              | INVITED, USER y ADMIN | Get    |
+| /newDuda/newD             | Permite crear una consulta                              | USER y ADMIN          | Post   |
+| /newD/actualizarDuda/{id} | Permite actualizar o cambiar los valores de la consulta | USER y ADMIN          | Put    |
+| /newD/deletDuda/{id}      | Permite borrat la consulta                              | USER y ADMIN          | Delete |
+| /usuarios/crearUsuario    | Permite crear un nuevo usuario por                      | INVITED y ADMIN       | Post   |
