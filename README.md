@@ -95,6 +95,21 @@ En el punto anterior, buscamos la consulta con ID 3. Aquí la actualizamos y pod
 
 Creamos una nueva consulta.
 
-#### 
+
+
+#### Control de errores.
+
+Ejemplos del manejo de excepciones.
+
+![Control de Errores](src/main/resources/images/controlDeErrores.png "Hover text")
+
+Aquí tenemos un ejemplo donde queremos crear una nueva consulta, pero 
+nos falta el campo de "estado", el cual indica que la duda creada aún no
+ tiene una respuesta final. Al no ingresar este dato, nos arroja un 
+error.
+
+![Control de Errores 1](src/main/resources/images/controlDeErrores1.png "Hover text")
+
+En este ejemplo, estamos buscando un ID inexistente y nos arroja un error diciendo que el ID es inválido.
 
 #### 

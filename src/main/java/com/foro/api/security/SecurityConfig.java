@@ -36,7 +36,7 @@ public class SecurityConfig  {
   JwtAuthorizationFilter authorizationFilter;
 
 
-/*
+
   
 //! config sin seguridad para hacer pruebas
   @Bean
@@ -81,8 +81,9 @@ public class SecurityConfig  {
     .and().build();
 
   }
- */
+
   //! config sin seguridad para hacer pruebas
+  /*
 //! config con seguridad
   
   @Bean
@@ -132,7 +133,7 @@ public class SecurityConfig  {
     .and().build();
     
   }
-
+ */
 //!
 /*
     @Bean
