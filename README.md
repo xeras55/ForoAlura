@@ -30,11 +30,11 @@ Aqui presento mi solucion a el reto propuesto por parte de Alura Latam en la for
 
 ### tecnologias usadas
 
-| VsCode     | ![VSCode Icon](src/main/resources/images/file_type_vscode_icon_130084.ico "Hover text")   |
-| ---------- | ----------------------------------------------------------------------------------------- |
-| Java       | ![Java Icon](src/main/resources/images/java_original_logo_icon_146458.ico "Hover text")   |
-| MySql      | ![MySQL Workbench Icon](src/main/resources/images/mysqlworkbench_103806.ico "Hover text") |
-| SpringBoot |                                                                                           |
+| VsCode     | ![VSCode Icon](src/main/resources/images/file_type_vscode_icon_130084.ico "Hover text")     |
+| ---------- | ------------------------------------------------------------------------------------------- |
+| Java       | ![Java Icon](src/main/resources/images/java_original_logo_icon_146458.ico "Hover text")     |
+| MySql      | ![MySQL Workbench Icon](src/main/resources/images/mysqlworkbench_103806.ico "Hover text")   |
+| SpringBoot | ![Spring Boot Icon](src/main/resources/images/icons8-spring-boot-color-32.png "Hover text") |
 
 ## EndPoints
 
