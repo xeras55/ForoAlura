@@ -47,21 +47,53 @@ Aqui presento mi solucion a el reto propuesto por parte de Alura Latam en la for
 | /newD/deletDuda/{id}      | Permite borrat la consulta                              | USER y ADMIN          | Delete |
 | /usuarios/crearUsuario    | Permite crear un nuevo usuario por                      | INVITED y ADMIN       | Post   |
 
-### Aplicacion
+## Aplicacion
 
 #### Registro de usuario
 
+![Registro de Usuario](src/main/resources/images/registroUsuario.png "Hover text")
+
+Creamos un usuario con los datos solicitados
+
 #### Busqueda sin token
+
+![Consulta sin Token](src/main/resources/images/consultaSinToken.png "Hover text")
+
+intentamos acceder sin previamente conseguir un token y nos arroja un error
 
 #### Autenticacion y autorizacion con token
 
+![Conseguir Token](src/main/resources/images/conseguirToken.png "Hover text")
+
+Hacemos la autenticacion y conseguimos autorizacion por medio del token
+
+![Acceso con Token](src/main/resources/images/accesoConToken.png "Hover text")
+
+Ingresamos el token y nos da el acceso a consultas
+
 #### Busqueda de todas las consultas
+
+![Buscar Todas las Dudas](src/main/resources/images/buscarTodasDudas.png "Hover text")
+
+Aqui ya podemos realizar busquedas sin embargo estas nos arrojan informacion incesesaria en este caso en particulas
 
 #### Busqueda con Id
 
+![Buscar Duda por ID](src/main/resources/images/buscarDudaId.png "Hover text")
+
+Aqui en base a lo visto en el punto anterior ya aplicamos un patron DTO para poder filtrar la informacion recivida y mostrar mejor los datos sin informacion inecesaria
+
 #### Actualizar consulta
 
+![Duda Actualizada](src/main/resources/images/dudaActualizada.png "Hover text")
+
+En el punto anterior buscamos la consulta con id 3 aqui la actualizamos y podemos ver que mantiene el mismo id
+
 #### Creacion de consulta
+
+![Creación de Nueva Consulta](src/main/resources/images/creacionNuevaConsulta.png "Hover text")
+
+Creamos una nueva consulta
 
 
 
