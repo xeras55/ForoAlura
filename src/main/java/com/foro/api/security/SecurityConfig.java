@@ -49,6 +49,7 @@ public class SecurityConfig  {
             auth.requestMatchers("/newDuda/newD").permitAll();
             auth.requestMatchers("/duda/dudaByIdDto/{id}").permitAll();
             auth.requestMatchers("/newDuda/actualizarDuda/{id}").permitAll();
+            
             auth.anyRequest().authenticated();
           })
           .sessionManagement(session ->{
