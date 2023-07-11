@@ -1,34 +1,34 @@
 # Challenge ONE | Back End | Foro Alura
 
-Aqui presento mi solucion a el reto propuesto por parte de Alura Latam en la formacion Backend, en el cual se nos pidio que hicieramos una API REST, en la cual trabaja con el foro de Alura donde podremos plasmar nuestras dudas referente a los temas tratados en las clases.
+Aquí presento mi solución al reto propuesto por parte de Alura Latam en la formación Backend, en el cual se nos pidió que hiciéramos una API REST, en la cual trabajara con el foro de Alura, donde podremos plasmar nuestras dudas referentes a los temas tratados en las clases.
 
 ## Requerimentos
 
-- Crear una publicacion donde vengan las dudas de los usuarios
+- Crear una publicación donde vengan las dudas de los usuarios.
 
-- Estas tienen que esta relacionadas con algun curso dentro de la plataforma
+- Estas tienen que estar relacionadas con algún curso dentro de la plataforma.
 
-- Mostrar todas la publicaciones creadas
+- Mostrar todas las publicaciones creadas.
 
-- Mostrar publicaciones por medio de un id
+- Mostrar publicaciones por medio de un ID.
 
-- Actualizar los datos de una publicacion
+- Actualizar los datos de una publicación.
 
-- Eliminar una publicacion
+- Eliminar una publicación.
 
-- Manejo excepciones
+- Manejo de excepciones.
 
-## Requerimentos de Seguridad
+## Requisitos de Seguridad
 
-- Autenticacion con usuario y contraseña
+- Autenticación con usuario y contraseña.
 
-- Manejo de contraseñas con encriptacion BCrypt Password Encoder
+- Manejo de contraseñas con encriptación BCrypt Password Encoder.
 
-- Asignar Rol a cada usuario
+- Asignar rol a cada usuario.
 
-- Autorizacion JSON Web Tokens (JWT)
+- Autorización JSON Web Tokens (JWT).
 
-### tecnologias usadas
+### Tecnologías usadas
 
 | VsCode     | ![VSCode Icon](src/main/resources/images/file_type_vscode_icon_130084.ico "Hover text")     |
 | ---------- | ------------------------------------------------------------------------------------------- |
@@ -38,64 +38,62 @@ Aqui presento mi solucion a el reto propuesto por parte de Alura Latam en la for
 
 ## EndPoints
 
-| EndPoints                 | Descripcion                                             | Rol                   | Metodo |
-| ------------------------- | ------------------------------------------------------- | --------------------- | ------ |
-| /duda/dudaAll             | Permite ver todas las consultas de los ususarios        | INVITED, USER y ADMIN | Get    |
-| /duda/dudaByIdDto/{id}    | Permite ver las consiltas filtradas por id              | INVITED, USER y ADMIN | Get    |
-| /newDuda/newD             | Permite crear una consulta                              | USER y ADMIN          | Post   |
-| /newD/actualizarDuda/{id} | Permite actualizar o cambiar los valores de la consulta | USER y ADMIN          | Put    |
-| /newD/deletDuda/{id}      | Permite borrat la consulta                              | USER y ADMIN          | Delete |
-| /usuarios/crearUsuario    | Permite crear un nuevo usuario por                      | INVITED y ADMIN       | Post   |
+| EndPoints                 | Descripcion                                              | Rol                   | Metodo |
+| ------------------------- | -------------------------------------------------------- | --------------------- | ------ |
+| /duda/dudaAll             | Permite ver todas las consultas de los usuarios.         | INVITED, USER y ADMIN | Get    |
+| /duda/dudaByIdDto/{id}    | Permite ver las consultas filtradas por ID.              | INVITED, USER y ADMIN | Get    |
+| /newDuda/newD             | Permite crear una consulta                               | USER y ADMIN          | Post   |
+| /newD/actualizarDuda/{id} | Permite actualizar o cambiar los valores de la consulta. | USER y ADMIN          | Put    |
+| /newD/deletDuda/{id}      | Permite borrar la consulta.                              | USER y ADMIN          | Delete |
+| /usuarios/crearUsuario    | Permite crear un nuevo usuario.                          | INVITED y ADMIN       | Post   |
 
-## Aplicacion
+## Aplicación
 
 #### Registro de usuario
 
 ![Registro de Usuario](src/main/resources/images/registroUsuario.png "Hover text")
 
-Creamos un usuario con los datos solicitados
+Creamos un usuario con los datos solicitados.
 
-#### Busqueda sin token
+#### Búsqueda sin token
 
 ![Consulta sin Token](src/main/resources/images/consultaSinToken.png "Hover text")
 
-intentamos acceder sin previamente conseguir un token y nos arroja un error
+Intentamos acceder sin haber obtenido previamente un token y nos arroja un error.
 
-#### Autenticacion y autorizacion con token
+#### Autenticación y autorización con token
 
 ![Conseguir Token](src/main/resources/images/conseguirToken.png "Hover text")
 
-Hacemos la autenticacion y conseguimos autorizacion por medio del token
+Realizamos la autenticación y obtenemos autorización mediante el token.
 
 ![Acceso con Token](src/main/resources/images/accesoConToken.png "Hover text")
 
-Ingresamos el token y nos da el acceso a consultas
+Ingresamos el token y obtenemos acceso a las consultas.
 
-#### Busqueda de todas las consultas
+#### Búsqueda de todas las consultas.
 
 ![Buscar Todas las Dudas](src/main/resources/images/buscarTodasDudas.png "Hover text")
 
-Aqui ya podemos realizar busquedas sin embargo estas nos arrojan informacion incesesaria en este caso en particulas
+Aquí ya podemos realizar búsquedas, sin embargo, nos arrojan información innecesaria en este caso en particular.
 
-#### Busqueda con Id
+#### Búsqueda con ID.
 
 ![Buscar Duda por ID](src/main/resources/images/buscarDudaId.png "Hover text")
 
-Aqui en base a lo visto en el punto anterior ya aplicamos un patron DTO para poder filtrar la informacion recivida y mostrar mejor los datos sin informacion inecesaria
+En este caso, podemos realizar una búsqueda de consulta por medio de un ID y, aplicando un patrón DTO (Objeto de Transferencia de Datos), podemos evitar enviar información innecesaria en la respuesta.
 
 #### Actualizar consulta
 
 ![Duda Actualizada](src/main/resources/images/dudaActualizada.png "Hover text")
 
-En el punto anterior buscamos la consulta con id 3 aqui la actualizamos y podemos ver que mantiene el mismo id
+En el punto anterior, buscamos la consulta con ID 3. Aquí la actualizamos y podemos ver que mantiene el mismo ID.
 
-#### Creacion de consulta
+#### Creación de consulta.
 
 ![Creación de Nueva Consulta](src/main/resources/images/creacionNuevaConsulta.png "Hover text")
 
-Creamos una nueva consulta
-
-
+Creamos una nueva consulta.
 
 #### 
 
