@@ -120,6 +120,6 @@ En este ejemplo, estamos buscando un ID inexistente y nos arroja un error dicien
 
 Trabajo realizado por [Gerardo Sanchez](https://www.linkedin.com/in/gerardosm)
 
-![LinkedIn Icon](src/main/resources/images/linkedin.ico "Hover text")
+[![LinkedIn Icon](src/main/resources/images/linkedin.ico)](http://www.linkedin.com/in/gerardosm)
 
  
