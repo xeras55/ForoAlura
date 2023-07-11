@@ -112,4 +112,14 @@ error.
 
 En este ejemplo, estamos buscando un ID inexistente y nos arroja un error diciendo que el ID es inválido.
 
-#### 
+##### Agradecimientos
+
+- **ONE – Oracle Next Education**
+
+- **Alura**
+
+Trabajo realizado por [Gerardo Sanchez](https://www.linkedin.com/in/gerardosm)
+
+![LinkedIn Icon](src/main/resources/images/linkedin.ico "Hover text")
+
+ 
