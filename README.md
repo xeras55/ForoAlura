@@ -30,11 +30,11 @@ Aqui presento mi solucion a el reto propuesto por parte de Alura Latam en la for
 
 ### tecnologias usadas
 
-| Va         | imagen perrona |
-| ---------- | -------------- |
-| Java       |                |
-| MySql      |                |
-| SpringBoot |                |
+| VsCode     | ![Vscode Logo ()] |
+| ---------- | ----------------- |
+| Java       |                   |
+| MySql      |                   |
+| SpringBoot |                   |
 
 ## EndPoints
 
@@ -46,3 +46,25 @@ Aqui presento mi solucion a el reto propuesto por parte de Alura Latam en la for
 | /newD/actualizarDuda/{id} | Permite actualizar o cambiar los valores de la consulta | USER y ADMIN          | Put    |
 | /newD/deletDuda/{id}      | Permite borrat la consulta                              | USER y ADMIN          | Delete |
 | /usuarios/crearUsuario    | Permite crear un nuevo usuario por                      | INVITED y ADMIN       | Post   |
+
+### Aplicacion
+
+#### Registro de usuario
+
+#### Busqueda sin token
+
+#### Autenticacion y autorizacion con token
+
+#### Busqueda de todas las consultas
+
+#### Busqueda con Id
+
+#### Actualizar consulta
+
+#### Creacion de consulta
+
+
+
+#### 
+
+#### 

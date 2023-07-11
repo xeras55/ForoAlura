@@ -36,7 +36,7 @@ public class SecurityConfig  {
   JwtAuthorizationFilter authorizationFilter;
 
 
-
+/*
   
 //! config sin seguridad para hacer pruebas
   @Bean
@@ -49,8 +49,8 @@ public class SecurityConfig  {
             auth.requestMatchers("/newDuda/newD").permitAll();
             auth.requestMatchers("/duda/dudaByIdDto/{id}").permitAll();
             auth.requestMatchers("/newDuda/actualizarDuda/{id}").permitAll();
+            auth.requestMatchers("/duda/dudaById/{id}").permitAll();
             
-            auth.anyRequest().authenticated();
           })
           .sessionManagement(session ->{
             session.sessionCreationPolicy(SessionCreationPolicy.STATELESS);
@@ -81,10 +81,10 @@ public class SecurityConfig  {
     .and().build();
 
   }
-
+ */
   //! config sin seguridad para hacer pruebas
 //! config con seguridad
-  /*
+  
   @Bean
   SecurityFilterChain filterChain(HttpSecurity http, AuthenticationManager authenticationManager) throws Exception{
 
@@ -132,7 +132,7 @@ public class SecurityConfig  {
     .and().build();
     
   }
- */
+
 //!
 /*
     @Bean
