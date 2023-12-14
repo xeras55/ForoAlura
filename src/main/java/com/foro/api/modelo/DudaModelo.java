@@ -40,13 +40,10 @@ public class DudaModelo {
   @Column
   private Boolean estado;
 
-  
-
   public DudaModelo() {
 
   }
-  
-  
+
   public DudaModelo(String titulo, String mensaje, Date fecha_creacion, UsuarioModelo usuarioModelo,
       CursoModelo cursoModelo, List<RespuestaModelo> respuestaModelo, Boolean estado) {
     this.titulo = titulo;
@@ -58,28 +55,34 @@ public class DudaModelo {
     this.estado = estado;
   }
 
-
   public long getId() {
     return id;
   }
+
   public void setId(long id) {
     this.id = id;
   }
+
   public String getTitulo() {
     return titulo;
   }
+
   public void setTitulo(String titulo) {
     this.titulo = titulo;
   }
+
   public String getMensaje() {
     return mensaje;
   }
+
   public void setMensaje(String mensaje) {
     this.mensaje = mensaje;
   }
+
   public Date getFecha_creacion() {
     return fecha_creacion;
   }
+
   public void setFecha_creacion(Date fecha_creacion) {
     this.fecha_creacion = fecha_creacion;
   }
@@ -87,32 +90,34 @@ public class DudaModelo {
   public UsuarioModelo getUsuarioModelo() {
     return usuarioModelo;
   }
+
   public void setUsuarioModelo(UsuarioModelo usuarioModelo) {
     this.usuarioModelo = usuarioModelo;
   }
+
   public CursoModelo getCursoModelo() {
     return cursoModelo;
   }
+
   public void setCursoModelo(CursoModelo cursoModelo) {
     this.cursoModelo = cursoModelo;
   }
+
   public Boolean getEstado() {
     return estado;
   }
+
   public void setEstado(Boolean estado) {
     this.estado = estado;
   }
-
 
   public List<RespuestaModelo> getRespuestaModelo() {
     return respuestaModelo;
   }
 
-
   public void setRespuestaModelo(List<RespuestaModelo> respuestaModelo) {
     this.respuestaModelo = respuestaModelo;
   }
-
 
   @Override
   public String toString() {
@@ -121,5 +126,4 @@ public class DudaModelo {
         + ", estado=" + estado + "]";
   }
 
-  
 }

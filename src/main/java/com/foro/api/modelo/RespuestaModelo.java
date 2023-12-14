@@ -34,47 +34,56 @@ public class RespuestaModelo {
   @Column
   private Boolean solucion;
 
-  
   public RespuestaModelo() {
-    
+
   }
+
   public long getId() {
     return id;
   }
+
   public void setId(long id) {
     this.id = id;
   }
+
   public String getMensaje_res() {
     return mensaje_res;
   }
+
   public void setMensaje_res(String mensaje_res) {
     this.mensaje_res = mensaje_res;
   }
-  
+
   public Date getFecha_creacion() {
     return fecha_creacion;
   }
+
   public void setFecha_creacion(Date fecha_creacion) {
     this.fecha_creacion = fecha_creacion;
   }
+
   public long getId_usuario() {
     return id_usuario;
   }
+
   public void setId_usuario(long id_usuario) {
     this.id_usuario = id_usuario;
   }
+
   public Boolean getSolucion() {
     return solucion;
   }
+
   public void setSolucion(Boolean solucion) {
     this.solucion = solucion;
   }
+
   public DudaModelo getDudaModelo() {
     return dudaModelo;
   }
+
   public void setDudaModelo(DudaModelo dudaModelo) {
     this.dudaModelo = dudaModelo;
   }
 
-  
 }

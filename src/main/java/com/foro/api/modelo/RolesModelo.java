@@ -18,21 +18,14 @@ public class RolesModelo {
   @Enumerated(EnumType.STRING)
   private ERole nombre;
 
-
-  
-
   public RolesModelo() {
 
   }
-
-  
 
   public RolesModelo(Long id, ERole nombre) {
     this.id = id;
     this.nombre = nombre;
   }
-
-
 
   public Long getId() {
     return id;
@@ -50,5 +43,4 @@ public class RolesModelo {
     this.nombre = nombre;
   }
 
-  
 }

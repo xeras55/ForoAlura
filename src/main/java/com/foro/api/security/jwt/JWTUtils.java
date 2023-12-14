@@ -6,18 +6,12 @@ import java.util.function.Function;
 
 import javax.crypto.SecretKey;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
-
-import com.foro.api.modelo.UsuarioModelo;
-import com.foro.api.repository.UsuarioRepository;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
-import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
 import java.util.Base64;
 
@@ -29,84 +23,64 @@ public class JWTUtils {
   @Value("${jwt.time.expiration}")
   private String timeExpiration;
 
+  // !Generamos los tokens de acceso
+  public String generateAccesToken(String nombre) {
+    return Jwts.builder()
+        .setSubject(nombre)
+        .setIssuedAt(new Date(System.currentTimeMillis()))
+        .setExpiration(new Date(System.currentTimeMillis() + Long.parseLong(timeExpiration)))
+        .signWith(getSignatureKey(), SignatureAlgorithm.HS256)
+        .compact();
+  }
 
-//!Generamos los tokens de acceso
-      public String generateAccesToken(String nombre){
-        return Jwts.builder()
-                .setSubject(nombre)
-                .setIssuedAt(new Date(System.currentTimeMillis()))
-                .setExpiration(new Date(System.currentTimeMillis() + Long.parseLong(timeExpiration)))
-                .signWith(getSignatureKey(), SignatureAlgorithm.HS256)
-                .compact();
+  // ! validamos si el token ingresado es o no valido
+  public boolean isTokenValid(String token) {
+    try {
+      Jwts.parserBuilder()
+          .setSigningKey(getSignatureKey())
+          .build()
+          .parseClaimsJws(token)
+          .getBody();
+      return true;
+    } catch (Exception e) {
+      System.out.println("El token ingresado no es valido".concat(e.getMessage()));
+      return false;
     }
+  }
 
+  // !obtenemos unicamente el claim del nombre de usuario
+  public String getUsernameFromToken(String token) {
+    return getClaim(token, Claims::getSubject);
+  }
 
+  // !obtenemos los claims que puedan venir
+  public <T> T getClaim(String token, Function<Claims, T> claimsFunction) {
+    Claims claims = extractAllClaims(token);
+    return claimsFunction.apply(claims);
+  }
 
-//! validamos si el token ingresado es o no valido
-    public boolean isTokenValid(String token){
-      try{
-        Jwts.parserBuilder()
-            .setSigningKey(getSignatureKey())
-            .build()
-            .parseClaimsJws(token)
-            .getBody();
-            return true;
-      }catch(Exception e){
-        System.out.println("El token ingresado no es valido".concat(e.getMessage()));
-        return false;
-      }
-    }      
+  // !obtenemos todos los datos del token para extraerlos y reusarlos al momento
+  // de
+  public Claims extractAllClaims(String token) {
+    return Jwts.parserBuilder()
+        .setSigningKey(getSignatureKey())
+        .build()
+        .parseClaimsJws(token)
+        .getBody();
+  }
 
-    //!obtenemos unicamente el claim del nombre de usuario
-  public String getUsernameFromToken(String token){
-        return getClaim(token, Claims::getSubject);
-    }
+  // !con esto obtenemos la firma del token
+  /*
+   * private Key getSignatureKey() {
+   * byte[] keyBytes = Decoders.BASE64.decode(secretKey);
+   * return Keys.hmacShaKeyFor(keyBytes);
+   * }
+   */
 
-
-
-
-    //!obtenemos los claims que puedan venir
-    public <T> T getClaim(String token, Function<Claims, T> claimsFunction){
-      Claims claims = extractAllClaims(token);
-      return claimsFunction.apply(claims);
-    }
-    
-
-    //!obtenemos todos los datos del token para extraerlos y reusarlos al momento de 
-    public Claims extractAllClaims(String token){
-      return Jwts.parserBuilder()
-                .setSigningKey(getSignatureKey())
-                .build()
-                .parseClaimsJws(token)
-                .getBody();
-    }
-    
-
-
-//!con esto obtenemos la firma del token
-/*
-      private Key getSignatureKey() {
-        byte[] keyBytes = Decoders.BASE64.decode(secretKey);
-        return Keys.hmacShaKeyFor(keyBytes);
-      }
- */
-      
-      private Key getSignatureKey() {
-        byte[] keyBytes = Base64.getDecoder().decode(secretKey);
-        SecretKey llave = Keys.hmacShaKeyFor(keyBytes);
-        System.out.println(llave);
-        return llave;
-
-/*
-public static void main(String[] args) {
-  SecretKey key = Keys.secretKeyFor(SignatureAlgorithm.HS256);
-
-// Codificar la clave en Base64
-String encodedKey = Base64.getEncoder().encodeToString(key.getEncoded());
-
-// Imprimir la clave codificada
-System.out.println("Clave codificada: " + encodedKey);
-}
- */
-}
+  private Key getSignatureKey() {
+    byte[] keyBytes = Base64.getDecoder().decode(secretKey);
+    SecretKey llave = Keys.hmacShaKeyFor(keyBytes);
+    System.out.println(llave);
+    return llave;
+  }
 }

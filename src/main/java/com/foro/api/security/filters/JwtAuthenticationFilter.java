@@ -4,9 +4,7 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.apache.catalina.connector.Response;
 import org.springframework.http.MediaType;
-import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
@@ -35,8 +33,8 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
 
   @Override
   public Authentication attemptAuthentication(HttpServletRequest request,
-                                              HttpServletResponse response)
-                                              throws AuthenticationException {
+      HttpServletResponse response)
+      throws AuthenticationException {
     UsuarioModelo usuarioModelo = null;
     String nombre = "";
     String contrasena = "";
@@ -52,16 +50,17 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
     } catch (IOException e) {
       throw new RuntimeException(e);
     }
-    UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(nombre, contrasena);
+    UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(nombre,
+        contrasena);
     System.out.println(authenticationToken);
     return getAuthenticationManager().authenticate(authenticationToken);
   }
 
   @Override
   protected void successfulAuthentication(HttpServletRequest request,
-                                          HttpServletResponse response, 
-                                          FilterChain chain,
-                                          Authentication authResult) throws IOException, ServletException {
+      HttpServletResponse response,
+      FilterChain chain,
+      Authentication authResult) throws IOException, ServletException {
     User user = (User) authResult.getPrincipal();
     String token = jwtUtils.generateAccesToken(user.getUsername());
 
@@ -71,7 +70,6 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
     httpResponse.put("token", token);
     httpResponse.put("Message", "La Autenticacion fue correcta");
     httpResponse.put("nombre", user.getUsername());
-
 
     response.getWriter().write(new ObjectMapper().writeValueAsString(httpResponse));
     response.setStatus(200);

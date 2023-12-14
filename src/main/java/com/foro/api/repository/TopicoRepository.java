@@ -1,6 +1,5 @@
 package com.foro.api.repository;
 
-
 import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -11,6 +10,6 @@ import com.foro.api.modelo.TopicoModelo;
 
 @Repository
 public interface TopicoRepository extends JpaRepository<TopicoModelo, Long> {
-  List<TopicoModelo>findById(@Param("id")long id);
-  
+  List<TopicoModelo> findById(@Param("id") long id);
+
 }
